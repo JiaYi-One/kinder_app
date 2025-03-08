@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "216309172405",
+    "project_id": "fyp1-89f1d",
+    "storage_bucket": "fyp1-89f1d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216309172405:android:9547de2969e7668f3656fc",
+        "android_client_info": {
+          "package_name": "com.example.kinder_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX9HyIcxi4n8FTbaXQeTVykC6dTnh8te0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216309172405:android:d8bc883e1c7974bd3656fc",
+        "android_client_info": {
+          "package_name": "fyp1.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX9HyIcxi4n8FTbaXQeTVykC6dTnh8te0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
