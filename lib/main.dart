@@ -1,13 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kinder_app/screens/faq.dart';
 import 'package:kinder_app/screens/login.dart';
+import 'package:kinder_app/screens/home.dart';
+import 'package:kinder_app/screens/settings.dart';
+import 'package:kinder_app/screens/profile.dart';
+import 'package:kinder_app/screens/student.dart';
 import 'package:kinder_app/widgets/nav_drawer.dart';
 
-import 'screens/home.dart';
-import 'screens/settings.dart';
-import 'screens/profile.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensures Firebase initializes before the app runs
+  await Firebase.initializeApp(); // Initializes Firebase
   runApp(const MyApp());
 }
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Name',
+      title: 'Kindergarten',
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       home: const MainScreen(),
     );
@@ -38,14 +40,23 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const ProfileScreen(),
     const SettingsScreen(),
-    const FAQScreen(),
     const LoginScreen(),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 3) {
+      // Navigate to StudentScreen dynamically
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const StudentScreen(), // No hardcoded studentId
+        ),
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
