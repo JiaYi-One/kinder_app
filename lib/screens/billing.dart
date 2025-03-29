@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:kinder_app/firestore_service/bill_data.dart';
-import 'package:kinder_app/funct/pdf_generate.dart';
-import 'package:kinder_app/funct/pdf_open.dart';
+import 'package:kinder_app/firestore_service/bill_data.dart'; // Firebase Service
+import 'package:kinder_app/funct/pdf_generate.dart'; // For generating PDF
+import 'package:kinder_app/funct/pdf_open.dart'; // For opening generated PDF
 
 class BillingScreen extends StatefulWidget {
   const BillingScreen({super.key});
@@ -21,7 +21,7 @@ class _BillingScreenState extends State<BillingScreen> {
   @override
   void initState() {
     super.initState();
-    fetchParentIdAndBills();
+    fetchParentIdAndBills(); // Fetch parentId and corresponding bills
   }
 
   Future<void> fetchParentIdAndBills() async {
@@ -48,7 +48,6 @@ class _BillingScreenState extends State<BillingScreen> {
 
   void downloadBill(Map<String, dynamic> bill) async {
     File pdfFile = await generateBillPdf(bill);
-
     if (mounted) {
       ScaffoldMessenger.of(
         context,
@@ -85,14 +84,14 @@ class _BillingScreenState extends State<BillingScreen> {
                         itemBuilder: (context, index) {
                           var bill = bills[index];
                           return _buildInvoiceItem(
-                            bill['billNumber'],
-                            bill['billDate'],
-                            '\$${bill['totalAmount']}',
-                            bill['status'],
-                            bill['status'] == 'paid'
+                            bill['billNumber'] ?? '',
+                            bill['billDate'] ?? '',
+                            '\$${bill['totalAmount'] ?? '0'}',
+                            bill['paymentStatus'] ?? 'unpaid',
+                            bill['paymentStatus'] == 'paid'
                                 ? Colors.green
                                 : Colors.orange,
-                            bill['status'] != 'paid'
+                            bill['paymentStatus'] != 'paid'
                                 ? () => handlePayment(bill['billNumber'])
                                 : null,
                             bill,
@@ -113,10 +112,10 @@ class _BillingScreenState extends State<BillingScreen> {
     String status,
     Color statusColor,
     VoidCallback? onPayNow,
-    Map<String, dynamic> billData, // Add bill data parameter
+    Map<String, dynamic> billData,
   ) {
     return InkWell(
-      onTap: () => openBillPdf(billData), // Handle tap to open PDF
+      onTap: () => openBillPdf(billData),
       borderRadius: BorderRadius.circular(12),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
